@@ -1,0 +1,59 @@
+//Duel Duo Testing//
+
+Test plan:
+
+    Overview:
+        -Test the functionality of the Duel Duo game
+
+    Test Criteria:
+        -User is able to see all bots when the "See All Bots" button is pressed
+        -Wins and Losses are recorded correctly
+        -"Play again" button resets all text and images related to the current match
+        -User is able to duel again after "Play again" button is pressed
+        -Selected bots are correctly added to player Duo
+        -"Draw" button fills the bot selection with 5 bots and no duplicates
+
+    Entry Criteria:
+        -Test criteria provided
+        -Test version runs without critical errors
+        -Computer for testing purposes
+
+    Exit Criteria:
+        -All high priority test have passed
+        -Alloted time has expired
+
+    Details:
+        -Should run on any modern browser
+
+
+Test Case:
+
+    "See All Bots" button works as intended
+        Description: Test will verify that when the "See All Bots" button is pressed all bots are displayed for the User
+
+        Steps:
+            1.Access the duel duo game
+            2.Click on the "See All Bots" button
+
+        Test Postconditions:
+            -All bots should have been displayed on screen
+
+Bug Report:
+
+    "See All Bots" button Bug Report
+        Description: Nothing is displayed when the "See All Bots" button is pressed
+
+        Steps to reproduce:
+            1.Access the duel duo game
+            2.Click on the "See All Bots" button
+
+        Expected result:
+            -All bots should be shown on screen
+
+        Actual result:
+            -Nothing is displayed on screen
+
+        Environment:
+            -Chrome Version 94
+            -Windows 10
+        

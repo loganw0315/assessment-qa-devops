@@ -8,33 +8,36 @@ const {shuffleArray} = require('./utils')
 // app.use(cors());
 app.use(express.json())
 app.use(express.static('public'))
-// app.use(express.static(path.join(__dirname, 'public/index.js')))
-// app.get('/', (req,res)=>{
-//     res.sendFile(path.join(__dirname, 'public/index.html'))
-// })
+app.use(express.static(path.join(__dirname, 'public/index.js')))
+app.get('/', (req,res)=>{
+    res.sendFile(path.join(__dirname, 'public/index.html'))
+})
 
-// var Rollbar = require('rollbar')
-// var rollbar = new Rollbar({
-//   accessToken: '358a3f023ac241b5aeb566eebed4882c',
-//   captureUncaught: true,
-//   captureUnhandledRejections: true,
-// })
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: '5643f33a80d14b5a9dc0e76131f2c4f2',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
 
 app.get('/api/robots', (req, res) => {
     try {
         res.status(200).send(botsArr)
     } catch (error) {
         console.log('ERROR GETTING BOTS', error)
+        rollbar.warning('All bots could not be retrieved')
         res.sendStatus(400)
     }
 })
 
 app.get('/api/robots/five', (req, res) => {
     try {
+        rollbar.info('Someone drew 5 bots')
         let shuffled = shuffleArray(bots)
         let choices = shuffled.slice(0, 5)
         let compDuo = shuffled.slice(6, 8)
         res.status(200).send({choices, compDuo})
+        
     } catch (error) {
         console.log('ERROR GETTING FIVE BOTS', error)
         res.sendStatus(400)
@@ -43,6 +46,7 @@ app.get('/api/robots/five', (req, res) => {
 
 app.post('/api/duel', (req, res) => {
     try {
+        rollbar.info('Someone initiated a duel')
         // getting the duos from the front end
         let {compDuo, playerDuo} = req.body
 
@@ -74,6 +78,7 @@ app.post('/api/duel', (req, res) => {
 
 app.get('/api/player', (req, res) => {
     try {
+        rollbar.info('Player data retrieved')
         res.status(200).send(playerRecord)
     } catch (error) {
         console.log('ERROR GETTING PLAYER STATS', error)
